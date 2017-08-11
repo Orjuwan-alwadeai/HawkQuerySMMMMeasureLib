@@ -1,0 +1,57 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.measure.api.hawkquery</groupId>
+  <artifactId>HawkQueryMeasureLib</artifactId>
+  <version>0.0.1</version>
+
+
+    
+	<repositories>
+		<repository>
+			<id>org.tmatesoft.svnkit</id>
+			<url>https://maven.tmatesoft.com/content/repositories/releases/</url>
+		</repository>
+		<repository>
+			<id>Modelio</id>
+			<url>http://repository.modelio.org/</url>
+		</repository>
+		<repository>
+			<id>libthrift</id>
+			<url>https://mvnrepository.com/artifact/org.apache.thrift/libthrift/</url>
+		</repository>
+		
+		<repository>
+		<id>local</id>
+        <url>file:C:\Users\yaser And Orjuwan\.m2\repository</url>
+		</repository>
+		
+		
+		
+		
+		
+	</repositories>
+
+  
+  <dependencies>
+  	<dependency>
+  		<groupId>org.measure.smmmeasure.api</groupId>
+  		<artifactId>SMMMeasureApi</artifactId>
+  		<version>0.4.00</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.hawk.service</groupId>
+  		<artifactId>org.hawk.service.api</artifactId>
+  	</dependency>
+  </dependencies>
+  
+
+  <dependencyManagement>
+  	<dependencies>
+  		<dependency>
+  			<groupId>org.hawk.service</groupId>
+  			<artifactId>org.hawk.service.api</artifactId>
+  			<version>1.0.0-SNAPSHOT</version>
+  		</dependency>
+  	</dependencies>
+  </dependencyManagement>
+</project>
