@@ -69,7 +69,7 @@ public class HawkQuerySMMMMeasure extends SMMMeasure {
 		this.setName("HawkQuerySMMMMeasureLib");
 		this.setDescription("HawkQuerySMMMMeasureLib");
 		this.setType(MeasureType.DIRECT);
-		this.setUnite(MeasureUnite.Numeric);
+		this.setUnite(MeasureUnite.Undefined);
 
 		this.setServerUrl("http://localhost:8080/thrift/hawk/tuple");
 		this.setUsername("");
@@ -94,99 +94,98 @@ public class HawkQuerySMMMMeasure extends SMMMeasure {
 	}
 
 	public void setServerUrl(String serverUrl) {
-		replaceScopeProperty(HawkQueryConstants.SERVER_URL/*, ScopePropertyType.STRING*/, serverUrl, "Server URL inclusing Protocol");
+		replaceScopeProperty(HawkQueryConstants.SERVER_URL, serverUrl, "Server URL inclusing Protocol");
 		this.serverUrl = serverUrl;
 	}
 
 	public void setUsername(String username) {
-		replaceScopeProperty(HawkQueryConstants.USERNAME/*, ScopePropertyType.STRING*/, username, "username");
+		replaceScopeProperty(HawkQueryConstants.USERNAME, username, "username");
 		this.username = username;
 	}
 
 	public void setPassword(String password) {
-		replaceScopeProperty(HawkQueryConstants.PASSWORD/*, ScopePropertyType.STRING*/, password, "passeword");
+		replaceScopeProperty(HawkQueryConstants.PASSWORD, password, "passeword");
 		this.password = password;
 	}
 
 	public void setInstanceName(String instanceName) {
-		replaceScopeProperty(HawkQueryConstants.INSTANCE_NAME/*, ScopePropertyType.STRING*/, instanceName, "Hawk instance to Query");
+		replaceScopeProperty(HawkQueryConstants.INSTANCE_NAME, instanceName, "Hawk instance to Query");
 		this.instanceName = instanceName;
 	}
 
 	public void setQueryLanguage(String queryLanguage) {
-		replaceScopeProperty(HawkQueryConstants.QUERY_LANGUAGE/*, ScopePropertyType.STRING*/, queryLanguage, "Query Language");
+		replaceScopeProperty(HawkQueryConstants.QUERY_LANGUAGE, queryLanguage, "Query Language");
 		this.queryLanguage = queryLanguage;
 	}
 
 	public void setQuery(String query) {
-		replaceScopeProperty(HawkQueryConstants.QUERY/*, ScopePropertyType.STRING*/, query, "Query Logic");
+		replaceScopeProperty(HawkQueryConstants.QUERY, query, "Query Logic");
 		this.query = query;
 	}
 
 	public void setDefaultNamespaces(String defaultNamespaces) {
-		replaceScopeProperty(HawkQueryConstants.DEFAULT_NAMESPACES/*, ScopePropertyType.STRING*/, defaultNamespaces, "(optional) The default namespaces to be used to resolve ambiguous unqualified types.");
+		replaceScopeProperty(HawkQueryConstants.DEFAULT_NAMESPACES, defaultNamespaces, "(optional) The default namespaces to be used to resolve ambiguous unqualified types.");
 		//this.defaultNamespaces = defaultNamespaces;
 	}
 
 	public void setEffectiveMetamodelExcludes(Map<String, Map<String, Set>> effectiveMetamodelExcludes) {
-		addScopeProperty("effectiveMetamodelExcludes"/*, ScopePropertyType.STRING*/, "*", "");
+		addScopeProperty("effectiveMetamodelExcludes", "*", "");
 		//this.effectiveMetamodelExcludes = effectiveMetamodelExcludes;
 	}
 
 	public void setEffectiveMetamodelIncludes(Map<String, Map<String, Set>> effectiveMetamodelIncludes) {
-		addScopeProperty("effectiveMetamodelIncludes"/*, ScopePropertyType.STRING*/, "*", "");
+		addScopeProperty("effectiveMetamodelIncludes", "*", "");
 		//this.effectiveMetamodelIncludes = effectiveMetamodelIncludes;
 	}
 
 	public void setIncludeAttributes(boolean includeAttributes) {
-		replaceScopeProperty(HawkQueryConstants.INCLUDE_ATTRIBUTES/*, ScopePropertyType.STRING*/, String.valueOf(includeAttributes), "");
+		replaceScopeProperty(HawkQueryConstants.INCLUDE_ATTRIBUTES, String.valueOf(includeAttributes), "");
 		this.includeAttributes = includeAttributes;
 	}
 
 	public void setIncludeContained(boolean includeContained) {
-		replaceScopeProperty(HawkQueryConstants.INCLUDE_CONTAINED/*, ScopePropertyType.STRING*/, String.valueOf(includeContained), "");
+		replaceScopeProperty(HawkQueryConstants.INCLUDE_CONTAINED, String.valueOf(includeContained), "");
 		this.includeContained = includeContained;
 	}
 
 	public void setIncludeDerived(boolean includeDerived) {
-		replaceScopeProperty(HawkQueryConstants.INCLUDE_DERIVED/*, ScopePropertyType.STRING*/, String.valueOf(includeDerived), "");
+		replaceScopeProperty(HawkQueryConstants.INCLUDE_DERIVED, String.valueOf(includeDerived), "");
 		this.includeDerived = includeDerived;
 	}
 
 	public void setIncludeNodeIDs(boolean includeNodeIDs) {
-		replaceScopeProperty(HawkQueryConstants.INCLUDE_NODE_IDs/*, ScopePropertyType.STRING*/, String.valueOf(includeNodeIDs), "");
+		replaceScopeProperty(HawkQueryConstants.INCLUDE_NODE_IDs, String.valueOf(includeNodeIDs), "");
 		this.includeNodeIDs = includeNodeIDs;
 	}
 
 	public void setIncludeReferences(boolean includeReferences) {
-		replaceScopeProperty(HawkQueryConstants.INCLUDE_REFERENCES/*, ScopePropertyType.STRING*/, String.valueOf(includeReferences), "");
+		replaceScopeProperty(HawkQueryConstants.INCLUDE_REFERENCES, String.valueOf(includeReferences), "");
 		this.includeReferences = includeReferences;
 	}
 
 	public void addDefaultNamespace(String newValue) {
 		this.defaultNamespaces.add(newValue);
 		String property = listToCommaSeperatedString(this.defaultNamespaces);
-		replaceScopeProperty(HawkQueryConstants.DEFAULT_NAMESPACES/*, ScopePropertyType.STRING*/, property, "(optional) The default namespaces to be used to resolve ambiguous unqualified types.");
+		replaceScopeProperty(HawkQueryConstants.DEFAULT_NAMESPACES, property, "(optional) The default namespaces to be used to resolve ambiguous unqualified types.");
 	}
 	
 	public void addFilePattern(String newValue) {
 		this.filePatterns.add(newValue);
 		String property = listToCommaSeperatedString(this.filePatterns);
-		replaceScopeProperty(HawkQueryConstants.FILE_PATTERNS/*, ScopePropertyType.STRING*/, property, "(optional)	The file patterns for the query (e.g. *.uml)");
+		replaceScopeProperty(HawkQueryConstants.FILE_PATTERNS, property, "(optional)	The file patterns for the query (e.g. *.uml)");
 	}
 	
 	public void addRepository(String newValue) {
 		this.repository.add(newValue);
 		String property = listToCommaSeperatedString(this.repository);
-		replaceScopeProperty(HawkQueryConstants.REPOSITORY/*, ScopePropertyType.STRING*/, property, "(optional)	The repository for the query (or * for all repositories)");
+		replaceScopeProperty(HawkQueryConstants.REPOSITORY, property, "(optional)	The repository for the query (or * for all repositories)");
 	}
 
-	private ScopeProperty addScopeProperty(String name, /*ScopePropertyType type,*/ String defaultValue, String description) {
+	private ScopeProperty addScopeProperty(String name, String defaultValue, String description) {
 
 		ScopeProperty property = new ScopeProperty();
 
 		property.setName(name);
-//		property.setType(type);
 		property.setDefaultValue(defaultValue);
 		property.setDescription(description);
 
@@ -195,7 +194,7 @@ public class HawkQuerySMMMMeasure extends SMMMeasure {
 		return property;
 	}
 
-	private void replaceScopeProperty(String name, /*ScopeProperty type,*/ String defaultValue, String description) {
+	private void replaceScopeProperty(String name, String defaultValue, String description) {
 		
 		for(ScopeProperty property : this.getScopeProperties()) {
 			if(property.getName().equals(name)) {
@@ -211,12 +210,6 @@ public class HawkQuerySMMMMeasure extends SMMMeasure {
 		addScopeProperty(name, /*type, */defaultValue, description);
 		
 	}
-
-//	private void addScopeProperty(String name, ScopePropertyEnum enumType, String defaultValue, String description) {
-//		ScopeProperty property = addScopeProperty(name, ScopePropertyType.ENUM, defaultValue, description);
-//
-//		property.setEnumType(enumType);
-//	}
 	
 	private String listToCommaSeperatedString(List<String> list) {
 		StringBuffer property = new StringBuffer();
