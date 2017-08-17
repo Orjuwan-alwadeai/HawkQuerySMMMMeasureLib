@@ -8,46 +8,49 @@
  * Contributors:
  *     Orjuwan Al-Wadeai - Hawk Query SMMM Measure Implementation
  ******************************************************************************/
-package org.measure.hawkquery;
+package org.measure.hawkquery.impl;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.measure.smm.measure.api.IMeasurement;
 import org.measure.smm.measure.defaultimpl.measurements.DefaultMeasurement;
 
-public class ListMeasurement extends DefaultMeasurement {
-	List<IMeasurement> measurementList = new ArrayList<IMeasurement>();
-	
-	public ListMeasurement(){
-		setList(measurementList);
+public class MapMeasurement extends DefaultMeasurement {
+	public MapMeasurement(){
+		setMap(new HashMap<String, IMeasurement>());
 	}
-	
-	public void setList(List<IMeasurement> value){
-		addValue("value", value);
+
+	public void setMap(Map<String, IMeasurement> value){
+		addValue("value",value);
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public List<IMeasurement> getList(){
-		return (List<IMeasurement>) getValues().get("value");
+	public Map<String, IMeasurement> getMap(){
+		return (Map<String, IMeasurement>) getValues().get("value");
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public void add(IMeasurement measurement) {
-		((List<IMeasurement>) getValues().get("value")).add(measurement);
+	public void add(String key, IMeasurement measurement) {
+		((Map<String, IMeasurement>) getValues().get("value")).put(key, measurement);
 	}
-	
+
 	@Override
 	public String getLabel() {
 		String label = "";
-		for(IMeasurement measurement : measurementList) {
+		for(Entry<String, IMeasurement> entry : getMap().entrySet()) {
 			if(!label.isEmpty()) {
 				label += ", ";
 			}
-			label += measurement.getLabel();
-			
+			label +=  "(";
+			label +=  entry.getKey();
+			label +=  ", ";
+			label += (((IMeasurement) entry.getValue())).getLabel();
+			label +=  ")";
+
 		}
-		
-		return "[" + label + "]";
+
+		return "{" + label + "}";
 	}
 }

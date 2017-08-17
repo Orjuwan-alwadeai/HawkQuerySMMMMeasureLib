@@ -10,15 +10,22 @@
  ******************************************************************************/
 import static org.junit.Assert.*;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.jar.JarInputStream;
 
 import org.junit.Test;
-import org.measure.hawkquery.HawkQueryConstants;
-import org.measure.hawkquery.HawkQueryMeasure;
-import org.measure.hawkquery.ListMeasurement;
-import org.measure.hawkquery.MapMeasurement;
-import org.measure.hawkquery.StringMeasurement;
+import org.measure.hawkquery.impl.HawkQueryConstants;
+import org.measure.hawkquery.impl.HawkQueryMeasure;
+import org.measure.hawkquery.impl.ListMeasurement;
+import org.measure.hawkquery.impl.MapMeasurement;
+import org.measure.hawkquery.impl.StringMeasurement;
 import org.measure.smm.measure.api.IMeasurement;
 import org.measure.smm.measure.defaultimpl.measurements.IntegerMeasurement;
 
@@ -26,6 +33,29 @@ public class HawkQueryMeasureTest {
 
 	@Test
 	public void testQueryResult_Integer() {
+		
+		URL jar = null;
+		try {
+			jar = new URL("file:///C:/Users/yaser And Orjuwan/Documents/msc/Dissertation/DissertationOrjuwan/MeasureTutorial/MeasureAgent/storage/RandomGenerator/RandomGenerator-1.0.0.jar");
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			
+			File file = new File(jar.getFile());
+			boolean exists = file.exists();
+			FileInputStream in = new FileInputStream(file);
+			
+			JarInputStream jarStream = new JarInputStream(in);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
+		
+		
 		System.out.println("\n\ntestIntQueryResult *****");
 		String queryString = "return Class.all.size();";
 		List<IMeasurement> measurements = sendQuery(queryString);	

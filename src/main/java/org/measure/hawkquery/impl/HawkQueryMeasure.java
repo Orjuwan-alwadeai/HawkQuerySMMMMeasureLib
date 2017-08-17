@@ -8,7 +8,7 @@
  * Contributors:
  *     Orjuwan Al-Wadeai - Hawk Query SMMM Measure Implementation
  ******************************************************************************/
-package org.measure.hawkquery;
+package org.measure.hawkquery.impl;
 
 import java.net.ConnectException;
 import java.util.ArrayList;
@@ -16,7 +16,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.NoSuchElementException;
-
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransport;
 import org.hawk.service.api.FailedQuery;
@@ -97,6 +96,9 @@ public class HawkQueryMeasure extends DirectMeasure {
 			// send query
 			QueryResult ret = executeQuery();
 
+			// disconnect
+			disconnect();
+			
 			// process result
 			if(ret != null) {
 				IMeasurement measurement = processQueryResult(ret);
@@ -173,6 +175,19 @@ public class HawkQueryMeasure extends DirectMeasure {
 			transport.close();
 		}
 		client =  APIUtils.connectTo(Hawk.Client.class, url, clientProtocol, username, password);
+	}
+	
+	
+	protected void disconnect() throws Exception {
+		if (client != null) {
+			final TTransport transport = client.getInputProtocol().getTransport();
+			transport.close();
+
+			client = null;
+			currentInstance = null;
+			username = null;
+			password = null;
+		}	
 	}
 
 	protected void selectInstance(String name) throws Exception {
@@ -284,7 +299,4 @@ public class HawkQueryMeasure extends DirectMeasure {
 		}
 		throw new NoSuchElementException(String.format("No instance exists with the name '%s'", name));
 	}
-
-
-
 }

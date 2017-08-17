@@ -8,7 +8,7 @@
  * Contributors:
  *     Orjuwan Al-Wadeai - Hawk Query SMMM Measure Implementation
  ******************************************************************************/
-package org.measure.hawkquery;
+package org.measure.hawkquery.impl;
 
 import org.hawk.service.api.ModelElement;
 import org.measure.smm.measure.defaultimpl.measurements.DefaultMeasurement;

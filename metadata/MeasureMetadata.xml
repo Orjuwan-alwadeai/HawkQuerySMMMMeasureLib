@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Measure name="HawkQuerySMMMMeasureLib" type="DIRECT" unite="Numeric">
+    <description>HawkQuerySMMMMeasureLib</description>
+    <scopeProperties defaultValue="http://localhost:8080/thrift/hawk/tuple" name="serverUrl">
+        <description>Server URL inclusing Protocol</description>
+    </scopeProperties>
+    <scopeProperties defaultValue="" name="username">
+        <description>username</description>
+    </scopeProperties>
+    <scopeProperties defaultValue="" name="password">
+        <description>passeword</description>
+    </scopeProperties>
+    <scopeProperties defaultValue="myhawk" name="instanceName">
+        <description>Hawk instance to Query</description>
+    </scopeProperties>
+    <scopeProperties defaultValue="org.hawk.epsilon.emc.EOLQueryEngine" name="queryLanguage">
+        <description>Query Language</description>
+    </scopeProperties>
+    <scopeProperties defaultValue="return Class.all.size();" name="query">
+        <description>Query Logic</description>
+    </scopeProperties>
+    <scopeProperties defaultValue="" name="defaultNamespaces">
+        <description>(optional) The default namespaces to be used to resolve ambiguous unqualified types.</description>
+    </scopeProperties>
+    <scopeProperties defaultValue="" name="filePatterns">
+        <description>(optional)	The file patterns for the query (e.g. *.uml)</description>
+    </scopeProperties>
+    <scopeProperties defaultValue="true" name="includeAttributes">
+        <description></description>
+    </scopeProperties>
+    <scopeProperties defaultValue="true" name="includeContained">
+        <description></description>
+    </scopeProperties>
+    <scopeProperties defaultValue="true" name="includeDerived">
+        <description></description>
+    </scopeProperties>
+    <scopeProperties defaultValue="false" name="includeNodeIDs">
+        <description></description>
+    </scopeProperties>
+    <scopeProperties defaultValue="true" name="includeReferences">
+        <description></description>
+    </scopeProperties>
+    <scopeProperties defaultValue="" name="repository">
+        <description>(optional)	The repository for the query (or * for all repositories)</description>
+    </scopeProperties>
+</Measure>
