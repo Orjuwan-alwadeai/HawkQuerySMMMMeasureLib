@@ -54,12 +54,6 @@ public class HawkQueryMeasure extends DirectMeasure {
 	/**  (optional)	The default namespaces to be used to resolve ambiguous unqualified types. */
 	private String defaultNamespaces; 									
 
-	/**  (optional)	If set and not empty, the mentioned metamodels, types and features will not be fetched. The string '*' can be used to refer to all types within a metamodel or all fields within a type. */
-	//	private Map<String,Map<String,Set>> effectiveMetamodelExcludes; 	
-	//
-	//	/**  (optional)	If set and not empty, only the specified metamodels, types and features will be fetched. Otherwise, everything that is not excluded will be fetched. The string '*' can be used to refer to all types within a metamodel or all fields within a type. */
-	//	private Map<String,Map<String,Set>>  effectiveMetamodelIncludes; 	
-
 	/**  (optional)	The file patterns for the query (e.g. *.uml). */
 	private List<String> filePatterns = new ArrayList<String>(); 									
 
@@ -77,6 +71,7 @@ public class HawkQueryMeasure extends DirectMeasure {
 
 	/**  (optional)	Whether to include references (true) or not (false) in model element results. */
 	private Boolean includeReferences;  								
+	
 	/**  (optional)	The repository for the query (or * for all repositories). */
 	private String repository;  	
 
@@ -96,28 +91,18 @@ public class HawkQueryMeasure extends DirectMeasure {
 			// send query
 			QueryResult ret = executeQuery();
 
-			// disconnect
-			disconnect();
-			
 			// process result
 			if(ret != null) {
 				IMeasurement measurement = processQueryResult(ret);
 				result.add(measurement);
 			} else {
-	            throw new Exception("Query Result is null" );
+	            throw new Exception("Query Result is null");
 			}
 
-		} catch (HawkInstanceNotFound e) {
-            throw new Exception("Error during Measure Execution : " + e.getMessage(), e);
-		} catch (HawkInstanceNotRunning e) {
-            throw new Exception("Error during Measure Execution : " + e.getMessage(), e);
-		} catch (UnknownQueryLanguage e) {
-            throw new Exception("Error during Measure Execution : " + e.getMessage(), e);
-		} catch (InvalidQuery e) {
-            throw new Exception("Error during Measure Execution : " + e.getMessage(), e);
-		} catch (FailedQuery e) {
-            throw new Exception("Error during Measure Execution : " + e.getMessage(), e);
-		} catch (TException e) {
+			// disconnect
+			disconnect();
+			
+		} catch (Exception e) {
             throw new Exception("Error during Measure Execution : " + e.getMessage(), e);
 		}
 		return result;
