@@ -8,7 +8,7 @@
  * Contributors:
  *     Orjuwan Al-Wadeai - Hawk Query SMMM Measure Implementation
  ******************************************************************************/
-package org.measure.hawkquery.impl;
+package org.hawk.measure.impl;
 
 
 public interface HawkQueryConstants {

@@ -8,7 +8,7 @@
  * Contributors:
  *     Orjuwan Al-Wadeai - Hawk Query SMMM Measure Implementation
  ******************************************************************************/
-package org.measure.hawkquery.impl;
+package org.hawk.measure.impl;
 
 import java.net.ConnectException;
 import java.util.ArrayList;
@@ -125,9 +125,9 @@ public class HawkQueryMeasure extends DirectMeasure {
 
 	protected void initProperties() {
 		this.serverUrl = this.getProperty(HawkQueryConstants.SERVER_URL);
-		this.username = this.getProperty("username");
-		this.password = this.getProperty("password");
-		this.instanceName = this.getProperty("instanceName");
+		this.username = this.getProperty(HawkQueryConstants.USERNAME);
+		this.password = this.getProperty(HawkQueryConstants.PASSWORD);
+		this.instanceName = this.getProperty(HawkQueryConstants.INSTANCE_NAME);
 
 		this.queryLanguage = this.getProperty(HawkQueryConstants.QUERY_LANGUAGE);
 		this.query = this.getProperty(HawkQueryConstants.QUERY);
@@ -225,12 +225,10 @@ public class HawkQueryMeasure extends DirectMeasure {
 		case V_SHORT:
 			measurement = new ShortMeasurement();
 			((ShortMeasurement)measurement).setValue(ret.getVShort());
-			//short shortValue = ret.getVShort();
 			break;
 		case  V_STRING:
 			measurement = new StringMeasurement();
 			((StringMeasurement)measurement).setValue(ret.getVString());
-			//String stringValue = ret.getVString();
 			break;
 		case V_MODEL_ELEMENT_TYPE:
 			measurement = new ModelElementTypeMeasurement();
@@ -244,7 +242,7 @@ public class HawkQueryMeasure extends DirectMeasure {
 			measurement = new MapMeasurement();
 			for( Entry<String, QueryResult> entry : ret.getVMap().entrySet()) {
 				IMeasurement measurementInMap = processQueryResult(entry.getValue());
-				((MapMeasurement)measurement).getValues().put(entry.getKey(), measurementInMap);
+				((MapMeasurement)measurement).add(entry.getKey(), measurementInMap);
 			}
 			break;
 		case V_LONG:
@@ -255,7 +253,7 @@ public class HawkQueryMeasure extends DirectMeasure {
 			measurement = new ListMeasurement();
 			for(QueryResult retListValue : ret.getVList()) {
 				IMeasurement measurementInList = processQueryResult(retListValue);
-				((ListMeasurement)measurement).getList().add(measurementInList);
+				((ListMeasurement)measurement).add(measurementInList);
 			}
 			break;
 		case V_INTEGER:

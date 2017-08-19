@@ -8,7 +8,7 @@
  * Contributors:
  *     Orjuwan Al-Wadeai - Hawk Query SMMM Measure Implementation
  ******************************************************************************/
-package org.measure.hawkquery.model;
+package org.hawk.measure.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.measure.hawkquery.impl.HawkQueryConstants;
+import org.hawk.measure.impl.HawkQueryConstants;
 import org.measure.smm.measure.model.MeasureType;
 import org.measure.smm.measure.model.MeasureUnite;
 import org.measure.smm.measure.model.SMMMeasure;
@@ -66,8 +66,8 @@ public class HawkQuerySMMMMeasure extends SMMMeasure {
 
 	public HawkQuerySMMMMeasure() {
 		super();
-		this.setName("HawkQuerySMMMMeasureLib");
-		this.setDescription("HawkQuerySMMMMeasureLib");
+		this.setName("HawkQueryMeasure");
+		this.setDescription("Generic Query for Hawk Server tool");
 		this.setType(MeasureType.DIRECT);
 		this.setUnite(MeasureUnite.Undefined);
 

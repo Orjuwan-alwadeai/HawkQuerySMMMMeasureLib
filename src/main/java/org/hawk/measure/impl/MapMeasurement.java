@@ -8,7 +8,7 @@
  * Contributors:
  *     Orjuwan Al-Wadeai - Hawk Query SMMM Measure Implementation
  ******************************************************************************/
-package org.measure.hawkquery.impl;
+package org.hawk.measure.impl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,34 +19,39 @@ import org.measure.smm.measure.defaultimpl.measurements.DefaultMeasurement;
 
 public class MapMeasurement extends DefaultMeasurement {
 	public MapMeasurement(){
-		setMap(new HashMap<String, IMeasurement>());
+		//setMap(new HashMap<String, IMeasurement>());
 	}
 
-	public void setMap(Map<String, IMeasurement> value){
-		addValue("value",value);
-	}
+	/*public void setMap(Map<String, IMeasurement> value){
+		//addValue("value",value);
+		//getValues().putAll(value);
+	}*/
 
-	@SuppressWarnings("unchecked")
+	/*@SuppressWarnings("unchecked")
 	public Map<String, IMeasurement> getMap(){
 		return (Map<String, IMeasurement>) getValues().get("value");
-	}
+	}*/
 
-	@SuppressWarnings("unchecked")
+	//@SuppressWarnings("unchecked")
 	public void add(String key, IMeasurement measurement) {
-		((Map<String, IMeasurement>) getValues().get("value")).put(key, measurement);
+		getValues().put(key, measurement);
 	}
 
 	@Override
 	public String getLabel() {
 		String label = "";
-		for(Entry<String, IMeasurement> entry : getMap().entrySet()) {
+		for(Entry<String, Object> entry : getValues().entrySet()) {
 			if(!label.isEmpty()) {
 				label += ", ";
 			}
 			label +=  "(";
 			label +=  entry.getKey();
 			label +=  ", ";
+			if(entry.getValue() instanceof IMeasurement) {
 			label += (((IMeasurement) entry.getValue())).getLabel();
+			} else {
+				label += entry.getValue().toString();
+			}
 			label +=  ")";
 
 		}

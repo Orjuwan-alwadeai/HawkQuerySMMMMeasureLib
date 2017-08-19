@@ -8,28 +8,48 @@
  * Contributors:
  *     Orjuwan Al-Wadeai - Hawk Query SMMM Measure Implementation
  ******************************************************************************/
-package org.measure.hawkquery.impl;
+package org.hawk.measure.impl;
 
 import org.hawk.service.api.ModelElementType;
 import org.measure.smm.measure.defaultimpl.measurements.DefaultMeasurement;
 
 public class ModelElementTypeMeasurement extends DefaultMeasurement {
+	
+	ModelElementType localValue;
 	public ModelElementTypeMeasurement(){
+	}
+	
+	public void setValue(ModelElementType value){
+		localValue = value; 
+		if (value.isSetId()) {
+			addValue("id", value.getId());
+		}
 
+		if (value.isSetMetamodelUri()) {
+			addValue("metamodelUri", value.getMetamodelUri());
+		}
+
+		if (value.isSetTypeName()) {
+			addValue("typeName", value.getTypeName());
+		}
+
+		if (value.isSetAttributes()) {
+			addValue("attributes", String.valueOf(value.getAttributes()));
+		}
+
+		if (value.isSetReferences()) {
+			addValue("references", String.valueOf(value.getReferences()));
+		}
 	}
 	
-	public void setValue( ModelElementType value){
-		addValue("value",value);
-	}
-	
-	public  ModelElementType getValue(){
-		return ( ModelElementType) getValues().get("value");
-	}
+//	public  ModelElementType getValue(){
+//		return ( ModelElementType) getValues().get("value");
+//	}
 	
 	
 	@Override
 	public String getLabel() {
-		return getValues().get("value").toString();
+		return localValue.toString();
 	}
 	
 	

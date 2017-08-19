@@ -1,3 +1,4 @@
+package org.hawk.measure.impl.tests;
 /*******************************************************************************
  * Copyright (c) 2017 Aston University
  * All rights reserved. This program and the accompanying materials
@@ -20,12 +21,12 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.jar.JarInputStream;
 
+import org.hawk.measure.impl.HawkQueryConstants;
+import org.hawk.measure.impl.HawkQueryMeasure;
+import org.hawk.measure.impl.ListMeasurement;
+import org.hawk.measure.impl.MapMeasurement;
+import org.hawk.measure.impl.StringMeasurement;
 import org.junit.Test;
-import org.measure.hawkquery.impl.HawkQueryConstants;
-import org.measure.hawkquery.impl.HawkQueryMeasure;
-import org.measure.hawkquery.impl.ListMeasurement;
-import org.measure.hawkquery.impl.MapMeasurement;
-import org.measure.hawkquery.impl.StringMeasurement;
 import org.measure.smm.measure.api.IMeasurement;
 import org.measure.smm.measure.defaultimpl.measurements.IntegerMeasurement;
 
@@ -33,29 +34,6 @@ public class HawkQueryMeasureTest {
 
 	@Test
 	public void testQueryResult_Integer() {
-		
-		URL jar = null;
-		try {
-			jar = new URL("file:///C:/Users/yaser And Orjuwan/Documents/msc/Dissertation/DissertationOrjuwan/MeasureTutorial/MeasureAgent/storage/RandomGenerator/RandomGenerator-1.0.0.jar");
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			
-			File file = new File(jar.getFile());
-			boolean exists = file.exists();
-			FileInputStream in = new FileInputStream(file);
-			
-			JarInputStream jarStream = new JarInputStream(in);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		
-		
-		
 		System.out.println("\n\ntestIntQueryResult *****");
 		String queryString = "return Class.all.size();";
 		List<IMeasurement> measurements = sendQuery(queryString);	
@@ -102,12 +80,12 @@ public class HawkQueryMeasureTest {
 
 	@Test
 	public void testQueryResult_ListofLists() {
-		System.out.println("\n\ntestMapQueryResult *****");
+		System.out.println("\n\ntestQueryResult_ListofLists *****");
 		String queryString = "return Model.types.select(t|t.name='Class').references;";
 		sendQuery(queryString);
 	}
 
-	@Test
+	//@Test
 	public void testQueryResult_ModelElementType() {
 		System.out.println("\n\n testModelElementTypeQueryResult *****");
 		sendQuery( "return Model.types;");
@@ -127,8 +105,11 @@ public class HawkQueryMeasureTest {
 
 	private List<IMeasurement> sendQuery(String queryString) {
 		HawkQueryMeasure measure = new HawkQueryMeasure();
+		
 		measure.getProperties().put(HawkQueryConstants.SERVER_URL, "http://localhost:8080/thrift/hawk/tuple");
-		measure.getProperties().put(HawkQueryConstants.INSTANCE_NAME, "instance_2");
+		
+		//measure.getProperties().put(HawkQueryConstants.SERVER_URL, "http://orjwan.fwd.wf/thrift/hawk/tuple");
+		measure.getProperties().put(HawkQueryConstants.INSTANCE_NAME, "TEST_2");
 		measure.getProperties().put(HawkQueryConstants.QUERY_LANGUAGE, "org.hawk.epsilon.emc.EOLQueryEngine");
 		measure.getProperties().put(HawkQueryConstants.QUERY, queryString);
 		try {
@@ -152,7 +133,7 @@ public class HawkQueryMeasureTest {
 				printMeasurement(sub, identation+">>");
 			}
 		} else if(measurement instanceof MapMeasurement) {
-			for(Entry<String, IMeasurement> entry: ((MapMeasurement) measurement).getMap().entrySet()) {
+			for(Entry<String, Object> entry: ((MapMeasurement) measurement).getValues().entrySet()) {
 				printMeasurement(entry.getValue(), identation + ">>" +  "Entry: " + entry.getKey());
 			}
 		} 
@@ -161,8 +142,10 @@ public class HawkQueryMeasureTest {
 	private void printElement(Object element, String identation) {
 
 		System.out.print(identation);
-		System.out.println(((IMeasurement) element).getLabel());
+		if(element instanceof IMeasurement) {
+			System.out.println(((IMeasurement) element).getLabel());
+		} else {
+			System.out.println(element.toString());
+		}
 	}
-
-
 }

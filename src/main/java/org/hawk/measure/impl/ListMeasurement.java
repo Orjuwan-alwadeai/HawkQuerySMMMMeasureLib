@@ -8,7 +8,7 @@
  * Contributors:
  *     Orjuwan Al-Wadeai - Hawk Query SMMM Measure Implementation
  ******************************************************************************/
-package org.measure.hawkquery.impl;
+package org.hawk.measure.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +44,8 @@ public class ListMeasurement extends DefaultMeasurement {
 			if(!label.isEmpty()) {
 				label += ", ";
 			}
-			label += measurement.getLabel();
 			
+			label += measurement.getLabel();	
 		}
 		
 		return "[" + label + "]";

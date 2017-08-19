@@ -8,25 +8,25 @@
  * Contributors:
  *     Orjuwan Al-Wadeai - Hawk Query SMMM Measure Implementation
  ******************************************************************************/
-package org.measure.hawkquery.impl;
+package org.hawk.measure.impl;
 
 import org.measure.smm.measure.defaultimpl.measurements.DefaultMeasurement;
 
-public class StringMeasurement extends DefaultMeasurement {
-	public StringMeasurement(){
+public class LongMeasurement extends DefaultMeasurement {
+	public LongMeasurement(){
 
 	}
 	
-	public void setValue(String value){
+	public void setValue(Long value){
 		addValue("value",value);
 	}
 	
-	public String getValue(){
-		return (String) getValues().get("value");
+	public Long getValue(){
+		return (Long) getValues().get("value");
 	}
 	
 	@Override
 	public String getLabel() {
-		return (String) getValues().get("value");
+		return getValues().get("value").toString();
 	}
 }
