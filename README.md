@@ -1,2 +1,2 @@
 # HawkQuerySMMMMeasureLib
-A Libarary to create a Hawk query measure 
+A Library to create a Hawk query measure 
