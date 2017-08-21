@@ -82,6 +82,12 @@ public class HawkQueryMeasure extends DirectMeasure {
 			// retrieve Properties
 			initProperties();
 
+			// check query is valid
+			if(query == null || query.isEmpty()) {
+				// throw exception
+	            throw new Exception("No Query is specified");
+			}
+			
 			// connect to server if not connected
 			connect(serverUrl, username, password);
 
@@ -110,11 +116,15 @@ public class HawkQueryMeasure extends DirectMeasure {
 
 	protected void initProperties() {
 		this.serverUrl = this.getProperty(HawkQueryConstants.SERVER_URL);
+		
 		this.username = this.getProperty(HawkQueryConstants.USERNAME);
+		
 		this.password = this.getProperty(HawkQueryConstants.PASSWORD);
+		
 		this.instanceName = this.getProperty(HawkQueryConstants.INSTANCE_NAME);
 
 		this.queryLanguage = this.getProperty(HawkQueryConstants.QUERY_LANGUAGE);
+		
 		this.query = this.getProperty(HawkQueryConstants.QUERY);
 
 		this.defaultNamespaces = this.getProperty(HawkQueryConstants.DEFAULT_NAMESPACES);
@@ -162,7 +172,6 @@ public class HawkQueryMeasure extends DirectMeasure {
 		client =  APIUtils.connectTo(Hawk.Client.class, url, clientProtocol, username, password);
 	}
 	
-	
 	protected void disconnect() throws Exception {
 		if (client != null) {
 			final TTransport transport = client.getInputProtocol().getTransport();
@@ -196,9 +205,7 @@ public class HawkQueryMeasure extends DirectMeasure {
 		QueryResult ret = null;
 
 		ret = client.query(currentInstance, query, queryLanguage, opts);
-		
-		processQueryResult(ret);
-		
+				
 		return ret;
 	}
 
