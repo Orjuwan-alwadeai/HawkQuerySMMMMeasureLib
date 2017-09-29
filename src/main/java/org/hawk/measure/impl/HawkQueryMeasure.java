@@ -71,10 +71,10 @@ public class HawkQueryMeasure extends DirectMeasure {
 	private String repository;  	
 
 	/**
-	 * This method perform all steps needed to execute a query. It connects to Hawk server, 
+	 * Performs all steps needed to execute a query. It connects to Hawk server, 
 	 * select Hawk instance, send query and process response. 
 	 * after executing query
-	 * @return list of measurements tha returned by Hawk Server after executing
+	 * @return list of measurements the returned by Hawk Server after executing
 	 * query
 	 */
 	public List<IMeasurement> getMeasurement() throws Exception {
@@ -117,7 +117,7 @@ public class HawkQueryMeasure extends DirectMeasure {
 	}
 
 	/**
-	 * This method retrieves the measure's properties and store them locally. 
+	 * Retrieves the measure's properties and store them locally. 
 	 */
 	public void initProperties() {
 		this.serverUrl = this.getProperty(HawkQueryConstants.SERVER_URL);
@@ -172,7 +172,7 @@ public class HawkQueryMeasure extends DirectMeasure {
 	}
 
 	/**
-	 * This method connects to a Hawk Server.
+	 * Connects to a Hawk Server.
 	 * @param url the Hawk server URL
 	 * @param username username needed to access Hawk server if required. 
 	 * @param password password needed to access Hawk server if required.
@@ -189,7 +189,7 @@ public class HawkQueryMeasure extends DirectMeasure {
 	}
 	
 	/**
-	 * This method free connection to Hawk Server.
+	 * Frees connection to Hawk Server.
 	 * @throws Exception if something goes wrong
 	 * 
 	 */
@@ -206,8 +206,7 @@ public class HawkQueryMeasure extends DirectMeasure {
 	}
 
 	/**
-	 * This method select a Hawk instance to be the instance to receive 
-	 * subsequent commands
+	 * Selects a Hawk instance 
 	 * @param name the Hawk instance name
 	 * @throws Exception if selection fails
 	 * 
@@ -219,7 +218,7 @@ public class HawkQueryMeasure extends DirectMeasure {
 	}
 
 	/**
-	 * This method send query to a Hawk instance and returns the result.
+	 * Sends query to the selected Hawk instance and returns the result.
 	 * @return query result
 	 * @throws Exception if query fails
 	 * 
@@ -244,7 +243,7 @@ public class HawkQueryMeasure extends DirectMeasure {
 	}
 
 	/**
-	 * This method processquery result to produce measurement values.
+	 * Processes the query result to produce measurement values.
 	 * @param ret query result
 	 * @return a measurement object
 	 * 
@@ -309,7 +308,7 @@ public class HawkQueryMeasure extends DirectMeasure {
 	}
 
 	/**
-	 * checks of client is connected to Hawk Server
+	 * Checks if client is connected to Hawk Server
 	 * @throws ConnectException if not connected 
 	 */
 	public void checkConnected() throws ConnectException {
@@ -319,7 +318,7 @@ public class HawkQueryMeasure extends DirectMeasure {
 	}
 
 	/**
-	 * checks of the Hawk instance specified in properties is selected on
+	 * Checks if the Hawk instance specified in properties is selected on
 	 * Hawk Server.
 	 * @throws ConnectException if not selected 
 	 */
@@ -331,7 +330,7 @@ public class HawkQueryMeasure extends DirectMeasure {
 	}
 
 	/**
-	 * finds a Hawk instance with name
+	 * Finds a Hawk instance with 'name'
 	 * @param name Hawk instance name
 	 * @return the Hawk instance
 	 * @throws TException if instance not found
