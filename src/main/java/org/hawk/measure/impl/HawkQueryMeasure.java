@@ -18,16 +18,11 @@ import java.util.Map.Entry;
 import java.util.NoSuchElementException;
 import org.apache.thrift.TException;
 import org.apache.thrift.transport.TTransport;
-import org.hawk.service.api.FailedQuery;
 import org.hawk.service.api.Hawk;
 import org.hawk.service.api.HawkInstance;
-import org.hawk.service.api.HawkInstanceNotFound;
-import org.hawk.service.api.HawkInstanceNotRunning;
 import org.hawk.service.api.HawkQueryOptions;
-import org.hawk.service.api.InvalidQuery;
 import org.hawk.service.api.QueryResult;
 import org.hawk.service.api.QueryResult._Fields;
-import org.hawk.service.api.UnknownQueryLanguage;
 import org.hawk.service.api.utils.APIUtils;
 import org.hawk.service.api.utils.APIUtils.ThriftProtocol;
 import org.measure.smm.measure.api.IMeasurement;
@@ -75,6 +70,13 @@ public class HawkQueryMeasure extends DirectMeasure {
 	/**  (optional)	The repository for the query (or * for all repositories). */
 	private String repository;  	
 
+	/**
+	 * This method perform all steps needed to execute a query. It connects to Hawk server, 
+	 * select Hawk instance, send query and process response. 
+	 * after executing query
+	 * @return list of measurements tha returned by Hawk Server after executing
+	 * query
+	 */
 	public List<IMeasurement> getMeasurement() throws Exception {
 		
 		List<IMeasurement> result = new ArrayList<IMeasurement>();;
@@ -114,7 +116,10 @@ public class HawkQueryMeasure extends DirectMeasure {
 		return result;
 	}
 
-	protected void initProperties() {
+	/**
+	 * This method retrieves the measure's properties and store them locally. 
+	 */
+	public void initProperties() {
 		this.serverUrl = this.getProperty(HawkQueryConstants.SERVER_URL);
 		
 		this.username = this.getProperty(HawkQueryConstants.USERNAME);
@@ -124,6 +129,9 @@ public class HawkQueryMeasure extends DirectMeasure {
 		this.instanceName = this.getProperty(HawkQueryConstants.INSTANCE_NAME);
 
 		this.queryLanguage = this.getProperty(HawkQueryConstants.QUERY_LANGUAGE);
+		if(this.queryLanguage == null) {
+			this.queryLanguage = "org.hawk.epsilon.emc.EOLQueryEngine";
+		}
 		
 		this.query = this.getProperty(HawkQueryConstants.QUERY);
 
@@ -158,12 +166,20 @@ public class HawkQueryMeasure extends DirectMeasure {
 		}
 
 		this.repository = this.getProperty(HawkQueryConstants.REPOSITORY);
-		if (this.repository == null) {
-			this.repository = "*";
-		}
+		//if (this.repository == null) {
+			///this.repository = "*";
+		//}
 	}
 
-	protected void connect(String url, String username, String password) throws Exception {
+	/**
+	 * This method connects to a Hawk Server.
+	 * @param url the Hawk server URL
+	 * @param username username needed to access Hawk server if required. 
+	 * @param password password needed to access Hawk server if required.
+	 * @throws Exception when connection fails
+	 * 
+	 */
+	public void connect(String url, String username, String password) throws Exception {
 		clientProtocol = ThriftProtocol.guessFromURL(url);
 		if (client != null) {
 			final TTransport transport = client.getInputProtocol().getTransport();
@@ -172,7 +188,12 @@ public class HawkQueryMeasure extends DirectMeasure {
 		client =  APIUtils.connectTo(Hawk.Client.class, url, clientProtocol, username, password);
 	}
 	
-	protected void disconnect() throws Exception {
+	/**
+	 * This method free connection to Hawk Server.
+	 * @throws Exception if something goes wrong
+	 * 
+	 */
+	public void disconnect() throws Exception {
 		if (client != null) {
 			final TTransport transport = client.getInputProtocol().getTransport();
 			transport.close();
@@ -184,13 +205,26 @@ public class HawkQueryMeasure extends DirectMeasure {
 		}	
 	}
 
-	protected void selectInstance(String name) throws Exception {
+	/**
+	 * This method select a Hawk instance to be the instance to receive 
+	 * subsequent commands
+	 * @param name the Hawk instance name
+	 * @throws Exception if selection fails
+	 * 
+	 */
+	public void selectInstance(String name) throws Exception {
 		checkConnected();
 		findInstance(name);
 		currentInstance = name;
 	}
 
-	protected QueryResult executeQuery() throws Exception  {
+	/**
+	 * This method send query to a Hawk instance and returns the result.
+	 * @return query result
+	 * @throws Exception if query fails
+	 * 
+	 */
+	public QueryResult executeQuery() throws Exception  {
 		checkInstanceSelected();
 
 		HawkQueryOptions opts = new HawkQueryOptions();
@@ -209,7 +243,13 @@ public class HawkQueryMeasure extends DirectMeasure {
 		return ret;
 	}
 
-	protected IMeasurement processQueryResult(QueryResult ret) {
+	/**
+	 * This method processquery result to produce measurement values.
+	 * @param ret query result
+	 * @return a measurement object
+	 * 
+	 */
+	public IMeasurement processQueryResult(QueryResult ret) {
 		IMeasurement measurement = null;
 		_Fields _field = ret.getSetField();
 
@@ -268,20 +308,35 @@ public class HawkQueryMeasure extends DirectMeasure {
 		return measurement;
 	}
 
-	private void checkConnected() throws ConnectException {
+	/**
+	 * checks of client is connected to Hawk Server
+	 * @throws ConnectException if not connected 
+	 */
+	public void checkConnected() throws ConnectException {
 		if (client == null) {
 			throw new ConnectException("Please connect to a Thrift endpoint first!");
 		}
 	}
 
-	protected void checkInstanceSelected() throws ConnectException {
+	/**
+	 * checks of the Hawk instance specified in properties is selected on
+	 * Hawk Server.
+	 * @throws ConnectException if not selected 
+	 */
+	public void checkInstanceSelected() throws ConnectException {
 		checkConnected();
 		if (currentInstance == null) {
 			throw new IllegalArgumentException("No Hawk instance has been selected");
 		}
 	}
 
-	protected HawkInstance findInstance(final String name) throws TException {
+	/**
+	 * finds a Hawk instance with name
+	 * @param name Hawk instance name
+	 * @return the Hawk instance
+	 * @throws TException if instance not found
+	 */
+	public HawkInstance findInstance(final String name) throws TException {
 		for (HawkInstance i : client.listInstances()) {
 			if (i.name.equals(name)) {
 				return i;

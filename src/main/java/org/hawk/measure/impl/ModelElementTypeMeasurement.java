@@ -19,6 +19,10 @@ public class ModelElementTypeMeasurement extends DefaultMeasurement {
 	public ModelElementTypeMeasurement(){
 	}
 	
+	/**
+	 * sets ModelElementType measurement as (key, value) elements
+	 * @param value ModelElementType object
+	 */
 	public void setValue(ModelElementType value){
 		localValue = value; 
 		if (value.isSetId()) {
@@ -42,33 +46,12 @@ public class ModelElementTypeMeasurement extends DefaultMeasurement {
 		}
 	}
 	
-//	public  ModelElementType getValue(){
-//		return ( ModelElementType) getValues().get("value");
-//	}
-	
-	
+	/**
+	 * @return string representation of measurement value
+	 * 
+	 */
 	@Override
 	public String getLabel() {
 		return localValue.toString();
 	}
-	
-	
-	
-	
-	/*  public String id; // required
-	  public String metamodelUri; // required
-	  public String typeName; // required
-	  public List<SlotMetadata> attributes; // optional
-	  public List<SlotMetadata> references; // optional
-	  
-	  SlotMetadata {
-
-		  public String name; // required
-		  public String type; // required
-		  public boolean isMany; // required
-		  public boolean isOrdered; // required
-		  public boolean isUnique; // required
-	  }
-	  */
-	  
 }

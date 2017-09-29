@@ -17,14 +17,28 @@ public class DoubleMeasurement extends DefaultMeasurement {
 
 	}
 	
+	/**
+	 * set the measurement value
+	 * @param value measurement value
+	 * 
+	 */
 	public void setValue(Double value){
 		addValue("value",value);
 	}
 	
+	/**
+	 * returns the measurement value
+	 * @return  measurement value
+	 * 
+	 */
 	public Double getValue(){
 		return (Double) getValues().get("value");
 	}
 	
+	/**
+	 * @return string representation of measurement value
+	 * 
+	 */
 	@Override
 	public String getLabel() {
 		return getValues().get("value").toString();

@@ -10,8 +10,6 @@
  ******************************************************************************/
 package org.hawk.measure.impl;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import org.measure.smm.measure.api.IMeasurement;
@@ -19,24 +17,22 @@ import org.measure.smm.measure.defaultimpl.measurements.DefaultMeasurement;
 
 public class MapMeasurement extends DefaultMeasurement {
 	public MapMeasurement(){
-		//setMap(new HashMap<String, IMeasurement>());
 	}
 
-	/*public void setMap(Map<String, IMeasurement> value){
-		//addValue("value",value);
-		//getValues().putAll(value);
-	}*/
-
-	/*@SuppressWarnings("unchecked")
-	public Map<String, IMeasurement> getMap(){
-		return (Map<String, IMeasurement>) getValues().get("value");
-	}*/
-
-	//@SuppressWarnings("unchecked")
+	
+	/**
+	 * adds a new (key, measurement object) to map
+	 * @param key string key 
+	 * @param measurement object value
+	 */
 	public void add(String key, IMeasurement measurement) {
 		getValues().put(key, measurement);
 	}
 
+	/**
+	 * @return string representation of measurement value
+	 * 
+	 */
 	@Override
 	public String getLabel() {
 		String label = "";

@@ -18,10 +18,20 @@ public class BooleanMeasurement extends DefaultMeasurement {
 
 	}
 	
+	/**
+	 * set the measurement value
+	 * @param value measurement value
+	 * 
+	 */
 	public void setValue(Boolean value){
 		addValue("value",value);
 	}
 	
+	/**
+	 * returns the measurement value
+	 * @return measurement value
+	 * 
+	 */
 	public Boolean getValue(){
 		return (Boolean) getValues().get("value");
 	}

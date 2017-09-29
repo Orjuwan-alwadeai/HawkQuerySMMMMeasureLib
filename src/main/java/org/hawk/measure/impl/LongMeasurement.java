@@ -17,14 +17,28 @@ public class LongMeasurement extends DefaultMeasurement {
 
 	}
 	
+	/**
+	 * set the measurement value
+	 * @param value measurement value
+	 * 
+	 */
 	public void setValue(Long value){
 		addValue("value",value);
 	}
 	
+	/**
+	 * returns the measurement value
+	 * @return measurement value
+	 * 
+	 */
 	public Long getValue(){
 		return (Long) getValues().get("value");
 	}
 	
+	/**
+	 * @return string representation of measurement value
+	 * 
+	 */
 	@Override
 	public String getLabel() {
 		return getValues().get("value").toString();

@@ -23,20 +23,38 @@ public class ListMeasurement extends DefaultMeasurement {
 		setList(measurementList);
 	}
 	
+	/**
+	 * sets list objects 
+	 * @param value list of measurement objects
+	 * 
+	 */
 	public void setList(List<IMeasurement> value){
 		addValue("value", value);
 	}
 	
+	/**
+	 * @return list of measurement objects
+	 * 
+	 */
 	@SuppressWarnings("unchecked")
 	public List<IMeasurement> getList(){
 		return (List<IMeasurement>) getValues().get("value");
 	}
 	
+	/**
+	 * adds a new measurement object to list
+	 * @param measurement measurement value
+	 * 
+	 */
 	@SuppressWarnings("unchecked")
 	public void add(IMeasurement measurement) {
 		((List<IMeasurement>) getValues().get("value")).add(measurement);
 	}
 	
+	/**
+	 * @return string representation of measurement value
+	 * 
+	 */
 	@Override
 	public String getLabel() {
 		String label = "";

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hawk backend="org.hawk.orientdb.OrientDatabase" name="instance_1">
+    <delay max="0" min="0"/>
+</hawk>

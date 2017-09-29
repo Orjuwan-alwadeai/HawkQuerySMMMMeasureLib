@@ -17,14 +17,28 @@ public class ShortMeasurement extends DefaultMeasurement {
 
 	}
 	
+	/**
+	 * sets the measurement value
+	 * @param value measurement value
+	 * 
+	 */
 	public void setValue(Short value){
 		addValue("value",value);
 	}
 	
+	/**
+	 * returns the measurement value
+	 * @return measurement value
+	 * 
+	 */
 	public Short getValue(){
 		return (Short) getValues().get("value");
 	}
 	
+	/**
+	 * @return string representation of measurement value
+	 * 
+	 */
 	@Override
 	public String getLabel() {
 		return getValues().get("value").toString();

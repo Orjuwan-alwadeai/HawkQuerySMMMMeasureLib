@@ -17,14 +17,28 @@ public class StringMeasurement extends DefaultMeasurement {
 
 	}
 	
+	/**
+	 * set the measurement value
+	 * @param value measurement value
+	 * 
+	 */
 	public void setValue(String value){
 		addValue("value",value);
 	}
 	
+	/**
+	 * returns the measurement value
+	 * @return measurement value
+	 * 
+	 */
 	public String getValue(){
 		return (String) getValues().get("value");
 	}
 	
+	/**
+	 * @return string representation of measurement value
+	 * 
+	 */
 	@Override
 	public String getLabel() {
 		return (String) getValues().get("value");

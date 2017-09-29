@@ -11,7 +11,6 @@
 package org.hawk.measure.impl;
 
 import org.hawk.service.api.ModelElement;
-import org.hawk.service.api.ModelElementType;
 import org.measure.smm.measure.defaultimpl.measurements.DefaultMeasurement;
 
 public class ModelElementMeasurement extends DefaultMeasurement {
@@ -22,6 +21,10 @@ public class ModelElementMeasurement extends DefaultMeasurement {
 
 	}
 
+	/**
+	 * sets ModelElement measurement as (key, value) elements
+	 * @param value ModelElement object
+	 */
 	public void setValue(ModelElement value){
 		localValue = value;
 		
@@ -57,64 +60,14 @@ public class ModelElementMeasurement extends DefaultMeasurement {
 			addValue("containers", String.valueOf(value.getContainers()));
 		}
 	}
-//
-//	public  ModelElement getValue(){
-//		return ( ModelElement) getValues().get("value");
-//	}
 
-
+	/**
+	 * @return string representation of measurement value
+	 * 
+	 */
 	@Override
 	public String getLabel() {
 		return localValue.toString();
 	}  
-	/*	public String id; // optional
-	  public String repositoryURL; // optional
-	  public String file; // optional
-	  public String metamodelUri; // optional
-	  public String typeName; // optional
-	  public List<AttributeSlot> attributes; // optional 
-	  AttributeSlot {
-		  public String name; // required
-		  public SlotValue value; // optional
-	  }
 
-
-
-	  public List<ReferenceSlot> references; // optional
-
-	  ReferenceSlot {
-		  public String name; // required
-		  public int position; // optional
-		  public List<Integer> positions; // optional
-		  public String id; // optional
-		  public List<String> ids; // optional
-		  public List<MixedReference> mixed; // optional
-	  }
-
-	  MixedReference {
-		  String id;
-		  int position
-	  }
-	  public List<ContainerSlot> containers; // optional
-	  ContainerSlot {
-		  public String name; // required
-		  public List<ModelElement> elements; // required
-	  }
-
-	public ModelElementMeasurement() {
-		Map<String,Object> datas = getValues();
-		datas.put("cpu", cpu);
-		datas.put("mem", mem);
-		datas.put("disks", disk);
-	}
-
-
-
-
-	@Override
-	public String getLabel() {
-		return "cpu : " + getValues().get("cpu") + "%, mem : " 
-				+ getValues().get("mem")+ "%, disks : " 
-				+ getValues().get("disks") +"%" ;
-	}*/
 }
